@@ -1,0 +1,90 @@
+#!/usr/bin/ruby
+
+require 'rubygems'
+require 'open3'
+require 'pp'
+require 'sinatra'
+require 'haml'
+require 'yaml'
+
+CONFIG = YAML::load_file(ARGV[0] || 'config.yml')
+
+def do_magic
+	result = plz_run_this CONFIG['command']
+	parse_tests result[:stdout] 
+end
+
+get '/' do
+
+results = do_magic
+
+haml <<END
+!!!
+%html
+	%head 
+		%title Dojo tester
+		%link{:rel => "stylesheet", :href => "style.css", :media => "screen", :type => "text/css" }
+		
+	%body
+
+		%h1 Results
+
+		#{test_bar results[:failed].size }
+		%br 
+
+		.output_left = test_results results[:failed] 
+ 
+		.output_right put something here  
+END
+		
+end
+
+#
+# parse_tests
+# receives the output of the command that ran the tests
+# and must return a hash of { :passed => [passed,tests], :fail => [failed,tests] }
+#
+
+def parse_tests str
+	
+	tests = {:passed => [], :failed => [] }
+	#this is the driver for simplectest	
+	lines = str.split(/\n+/)
+	lines.each_with_index do |l,i|
+		if lines[i+1] #just to prevent accessing the n+1 position		
+			if lines[i][0].chr == '>' && lines[i+1][0].chr == '['
+				tests[:failed] << { :test => lines[i], :cause => lines[i+i] }
+			else
+				tests[:passed] << lines[i]
+			end
+		end
+	end
+	
+	tests	
+end
+
+def break_lines str
+	str.gsub(/\n+/,"<br />")
+end
+
+def test_results num_errors
+	return "All tests passed!" if num_errors == 0
+	"Fuuuuu! #{num_errors} tests have failed..."
+end
+
+def test_bar num_errors
+
+	type = num_errors > 0 ? 'red' : 'green'
+
+	bar = "%img#start #{type}_start.png"
+	bar += "%img#end #{type}_end.png"
+
+#	div(bar, :class => 'test_bar')
+	".test_bar{:style => \"color: #{type}\"} Imagine a #{type} bar here." 
+end	
+
+def plz_run_this command
+	stdin,stdout,stderr = Open3::popen3 command 
+	#ignore,status = Process::waitpid2 pid
+	{ :stdout => stdout.read, :stderr => stderr.read }#, :error => status.exitstatus }
+end

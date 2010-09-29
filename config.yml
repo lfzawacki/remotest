@@ -1,0 +1,3 @@
+driver: simplectest
+command: make
+

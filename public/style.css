@@ -1,0 +1,62 @@
+
+body {
+    font-family: Gill Sans, sans-serif;
+    font-size: .9em; 
+/*    font-family: monospace; */ 
+    text-align: center;
+	width:1024px;
+	margin:0 auto;
+}
+
+#body h1 {
+    font-size: 4em;
+}
+
+a {
+    color: #999;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+div.test_bar { 
+    /*border:0px solid; 
+    padding-right: 600px;
+	padding-left: 400px;*/
+	clear:both;
+	background-image: url('red.png');
+	background-repeat: repeat-x;	
+	float: center;	
+	width: 462px;
+}
+
+
+img#start {
+	padding-right: 200px;	
+}
+
+img#end {
+	padding-left: 200px;
+}
+
+.output_left {
+	float: left;
+	padding: 20px;  
+	text-align:left;
+    background-color: #eee;
+	width: 460px;
+}
+
+.output_right {
+	float: right;
+	padding: 20px;  
+	text-align: left;
+    background-color: #ddd;
+	width: 400px;
+}
+
+div#fail {
+
+}
