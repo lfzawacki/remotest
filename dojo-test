@@ -2,7 +2,6 @@
 
 require 'rubygems'
 require 'open3'
-require 'pp'
 require 'sinatra'
 require 'haml'
 require 'yaml'
@@ -16,7 +15,7 @@ end
 
 get '/' do
 
-results = do_magic
+$results = do_magic
 
 haml <<END
 !!!
@@ -29,10 +28,15 @@ haml <<END
 
 		%h1 Results
 
-		#{test_bar results[:failed].size }
+		#{test_bar $results[:failed].size }
 		%br 
 
-		.output_left = test_results results[:failed] 
+		.output_left 
+			%h2= notice $results
+			- for f in $results[:failed]
+				.fail
+					%p= f[:test]
+					%p= f[:cause]
  
 		.output_right put something here  
 END
@@ -46,30 +50,38 @@ end
 #
 
 def parse_tests str
-	
-	tests = {:passed => [], :failed => [] }
 	#this is the driver for simplectest	
-	lines = str.split(/\n+/)
+	cases, text = str.split(/\n\n/) #separate the cases from the final text
+
+	tests = {:passed => [], :failed => [] }	
+	lines = cases.split(/\n+/)
 	lines.each_with_index do |l,i|
-		if lines[i+1] #just to prevent accessing the n+1 position		
-			if lines[i][0].chr == '>' && lines[i+1][0].chr == '['
-				tests[:failed] << { :test => lines[i], :cause => lines[i+i] }
-			else
+		if lines[i+1] != nil #just to prevent accessing the n+1 position		
+			if lines[i][0].chr == '>' && lines[i+1][0].chr == '['				
+				tests[:failed] << { :test => lines[i], :cause => lines[i+1] }
+			elsif lines[i][0].chr != '['
 				tests[:passed] << lines[i]
 			end
 		end
 	end
 	
-	tests	
+	tests
 end
 
-def break_lines str
-	str.gsub(/\n+/,"<br />")
+def notice tests
+	num_fail = tests[:failed].size
+	notice = num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} tests have failed..."
 end
 
-def test_results num_errors
-	return "All tests passed!" if num_errors == 0
-	"Fuuuuu! #{num_errors} tests have failed..."
+def test_results tests
+
+	result << "%h2 #{notice}"
+	
+	result << tests[:failed].each do |f|
+		"Test: #{f[:test]}\nlololol\nCause: #{f[:cause]}"
+	end
+
+	result.join("%br")
 end
 
 def test_bar num_errors

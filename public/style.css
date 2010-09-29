@@ -21,16 +21,16 @@ h1 {
     font-size: 3em;
 }
 
-div.test_bar { 
-    /*border:0px solid; 
-    padding-right: 600px;
-	padding-left: 400px;*/
-	clear:both;
-	background-image: url('red.png');
-	background-repeat: repeat-x;	
-	float: center;	
-	width: 462px;
-}
+/*div.test_bar { */
+/*    /*border:0px solid; */
+/*    padding-right: 600px;*/
+/*	padding-left: 400px;*/*/
+/*	clear:both;*/
+/*	background-image: url('red.png');*/
+/*	background-repeat: repeat-x;	*/
+/*	float: center;	*/
+/*	width: 462px;*/
+/*}*/
 
 
 img#start {
