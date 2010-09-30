@@ -1,2 +1,2 @@
 driver: simplectest
-command: "make -B"
+command: "cd example; make -B"
