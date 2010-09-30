@@ -5,7 +5,7 @@ body {
 /*    font-family: monospace; */ 
     text-align: center;
 	width:980px;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 #body h1 {
@@ -34,7 +34,8 @@ h1 {
 
 .output_left {
 	float: left;
-	padding: 90px;  
+	padding-top: 20px;
+	padding-left: 20px;  
 	text-align:left;
     background-color: #eee;
 	width: 800px;

@@ -14,39 +14,12 @@ def do_magic
 end
 
 get '/code' do
-	'some code'
+	haml :code
 end
 
 get '/' do
-
-$results = do_magic
-
-haml <<END
-!!!
-%html
-	%head
-		%title Dojo tester
-		%link{:rel => "stylesheet", :href => "style.css", :media => "screen", :type => "text/css" }
-
-	%body
-
-		%h1 Results
-
-		%img{:src => test_bar($results[:failed].size) + ".png", :alt => "" }
-		%br
-
-		.output_left
-			%h2= notice $results
-			- for f in $results[:failed]
-					.fail
-					.test 
-						%p= f[:test]
-					.cause 
-						%p= f[:cause]
-
-		-#.output_right put something here
-END
-
+	$results = do_magic
+	haml :tests
 end
 
 def parse_tests result
