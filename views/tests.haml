@@ -1,0 +1,22 @@
+!!!
+%html
+	%head
+		%title Dojo tester
+		%link{:rel => "stylesheet", :href => "style.css", :media => "screen", :type => "text/css" }
+
+	%body
+		%h1 Results
+
+		%img{:src => test_bar($results[:failed].size) + ".png", :alt => "" }
+		%br
+
+		.output_left
+			%h2= notice $results
+			%ul
+				- for f in $results[:failed]
+					%li.fail
+						.test 
+							%p= f[:test]
+						.cause 
+							%p= f[:cause]
+

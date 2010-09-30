@@ -1,3 +1,2 @@
-driver: pyunit
-command: "python vendingTest.py -v"
-
+driver: simplectest
+command: "make -B"

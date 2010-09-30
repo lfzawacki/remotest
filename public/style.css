@@ -8,6 +8,11 @@ body {
 	margin: 0 auto;
 }
 
+ul {
+	list-style-position: outside;
+	list-style-image: url(fail.png);
+}
+
 #body h1 {
     font-size: 4em;
 }

@@ -29,7 +29,7 @@ end
 
 def notice tests
 	num_fail = tests[:failed].size
-	notice = num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} tests have failed..."
+	notice = num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} test(s) have failed..."
 end
 
 def test_bar num_errors
