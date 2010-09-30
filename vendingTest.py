@@ -33,9 +33,9 @@ class TestsVendingMachine(unittest.TestCase):
 	def testBuyAWithCoins(self):
 		self.assertEquals(vending_machine(['O', 'D', 'GET-A']), ['A', 'Q', 'D', 'D'])
 
-)
 
 #	def testBuyBReturnCoin(self):
 #		self.assertEquals(vending_machine(['O','GET-B','RETURN-COIN']),['B'])
 
 unittest.main()
+

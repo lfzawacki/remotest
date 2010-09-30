@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'rubygems'
-require 'open3'
+require 'open4'
 require 'sinatra'
 require 'haml'
 require 'yaml'
@@ -10,7 +10,7 @@ CONFIG = YAML::load_file(ARGV[0] || 'config.yml')
 
 def do_magic
 	result = plz_run_this CONFIG['command']
-	parse_tests result[:stdout] 
+	parse_tests result
 end
 
 get '/' do
@@ -20,32 +20,32 @@ $results = do_magic
 haml <<END
 !!!
 %html
-	%head 
+	%head
 		%title Dojo tester
 		%link{:rel => "stylesheet", :href => "style.css", :media => "screen", :type => "text/css" }
-		
+
 	%body
 
 		%h1 Results
 
 		#{test_bar $results[:failed].size }
-		%br 
+		%br
 
-		.output_left 
+		.output_left
 			%h2= notice $results
 			- for f in $results[:failed]
 				.fail
 					%p= f[:test]
 					%p= f[:cause]
- 
-		.output_right put something here  
+
+		.output_right put something here
 END
-		
+
 end
 
-def parse_tests str
+def parse_tests result
 	require "drivers/#{CONFIG['driver']}"
-	PARSER.parse_tests str
+	Parser.parse_tests result[:stdout], result[:stderr], result[:exitcode]
 end
 
 def notice tests
@@ -56,7 +56,7 @@ end
 def test_results tests
 
 	result << "%h2 #{notice}"
-	
+
 	result << tests[:failed].each do |f|
 		"Test: #{f[:test]}\nlololol\nCause: #{f[:cause]}"
 	end
@@ -72,11 +72,12 @@ def test_bar num_errors
 	bar += "%img#end #{type}_end.png"
 
 #	div(bar, :class => 'test_bar')
-	".test_bar{:style => \"color: #{type}\"} Imagine a #{type} bar here." 
-end	
+	".test_bar{:style => \"color: #{type}\"} Imagine a #{type} bar here."
+end
 
 def plz_run_this command
-	stdin,stdout,stderr = Open3::popen3 command 
-	#ignore,status = Process::waitpid2 pid
-	{ :stdout => stdout.read, :stderr => stderr.read }#, :error => status.exitstatus }
+	pid, stdin,stdout,stderr = Open4::popen4 command
+	ignore,status = Process::waitpid2 pid
+	{ :stdout => stdout.read, :stderr => stderr.read, :exitstatus => status.exitstatus }
 end
+
