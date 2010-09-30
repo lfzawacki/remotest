@@ -16,7 +16,7 @@ The output is an html file with delicous ids and classes which can be used to en
 
 ## why?
 
-We're running a programming dojo from time to time in my university and we would really like a nice GUI for testing, like the one we have with Java, but with any language we might come along.
+We're running a programming dojo from time to time in my university and it would be really cool to have a GUI for testing, like the one we have with Java, but for any language that might come along.
 
 This is my attempt at solving this problem.
 
