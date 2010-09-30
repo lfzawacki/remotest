@@ -13,6 +13,10 @@ def do_magic
 	parse_tests result
 end
 
+get '/code' do
+	'some code'
+end
+
 get '/' do
 
 $results = do_magic
@@ -28,17 +32,19 @@ haml <<END
 
 		%h1 Results
 
-		#{test_bar $results[:failed].size }
+		%img{:src => test_bar($results[:failed].size) + ".png", :alt => "" }
 		%br
 
 		.output_left
 			%h2= notice $results
 			- for f in $results[:failed]
-				.fail
-					%p= f[:test]
-					%p= f[:cause]
+					.fail
+					.test 
+						%p= f[:test]
+					.cause 
+						%p= f[:cause]
 
-		.output_right put something here
+		-#.output_right put something here
 END
 
 end
@@ -53,26 +59,10 @@ def notice tests
 	notice = num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} tests have failed..."
 end
 
-def test_results tests
-
-	result << "%h2 #{notice}"
-
-	result << tests[:failed].each do |f|
-		"Test: #{f[:test]}\nlololol\nCause: #{f[:cause]}"
-	end
-
-	result.join("%br")
-end
-
 def test_bar num_errors
 
 	type = num_errors > 0 ? 'red' : 'green'
 
-	bar = "%img#start #{type}_start.png"
-	bar += "%img#end #{type}_end.png"
-
-#	div(bar, :class => 'test_bar')
-	".test_bar{:style => \"color: #{type}\"} Imagine a #{type} bar here."
 end
 
 def plz_run_this command

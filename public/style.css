@@ -4,7 +4,7 @@ body {
     font-size: .9em; 
 /*    font-family: monospace; */ 
     text-align: center;
-	width:1024px;
+	width:980px;
 	margin:0 auto;
 }
 
@@ -22,9 +22,9 @@ h1 {
 }
 
 /*div.test_bar { */
-/*    /*border:0px solid; */
+/*    border:0px solid; */
 /*    padding-right: 600px;*/
-/*	padding-left: 400px;*/*/
+/*	padding-left: 400px;*/
 /*	clear:both;*/
 /*	background-image: url('red.png');*/
 /*	background-repeat: repeat-x;	*/
@@ -32,21 +32,12 @@ h1 {
 /*	width: 462px;*/
 /*}*/
 
-
-img#start {
-	padding-right: 200px;	
-}
-
-img#end {
-	padding-left: 200px;
-}
-
 .output_left {
 	float: left;
-	padding: 20px;  
+	padding: 90px;  
 	text-align:left;
     background-color: #eee;
-	width: 460px;
+	width: 800px;
 }
 
 .output_right {
