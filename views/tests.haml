@@ -12,6 +12,14 @@
 		%img{:src => test_bar($results) + ".png"}
 		%br
 
+		.controls
+			%h3 Hide	
+			
+			%h4
+				%a Passed
+			%h4				
+				%a Failed
+
 		.output_left
 			%h2= notice $results
 			%ul
