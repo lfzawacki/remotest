@@ -27,3 +27,11 @@ In the current moment we have (poor) support for these frameworks
 * simplectest (C)
 * unittest (Python)
 
+### How to build my own driver?s
+
+A driver is any object that has a call method, with this signature:
+
+    .call (stdout , stderr , exitstatus ) => [ {:test => "test description" :passed => true/false , :cause => "describe the failure"}, ... ]
+
+stdout and stderr are regular strings and exitstatus is a number, therefore you can use it to parse the results of your command and return an array of the tests. Don't hesitate to look at the source code for the C and Python drivers. 
+
