@@ -9,7 +9,7 @@
 	%body
 		%h1 Results
 
-		%img{:src => test_bar($results) + ".png", :alt => "" }
+		%img{:src => test_bar($results) + ".png"}
 		%br
 
 		.output_left
@@ -17,7 +17,9 @@
 			%ul
 				- for test in $results
 					%li.test
-						%div{:class => test[:passed] ? "pass" : "fail"} 
-							%p= test[:test]
+						%p
+							%img{:src => (test[:passed] ? "pass" : "fail") + ".png" }
+							= test[:test]
+								 
 							- if not test[:passed]
 								.cause= test[:cause]
