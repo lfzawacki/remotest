@@ -54,17 +54,17 @@ START_TEST("testa 5 retorna V")
 
 END_TEST()
 
-START_TEST("testa 10 retorna X")
+//START_TEST("testa 10 retorna X")
 
-	ASSERT( decimalToRomano(10) == "X");
+//	ASSERT( decimalToRomano(10) == "X");
 
-END_TEST()
+//END_TEST()
 
-START_TEST("testa 42 retorna XLII")
+//START_TEST("testa 42 retorna XLII")
 
-	ASSERT( decimalToRomano(42) == "XLII");
+//	ASSERT( decimalToRomano(42) == "XLII");
 
-END_TEST()
+//END_TEST()
 
 //START_TEST ("testa 50 retorna L")
 

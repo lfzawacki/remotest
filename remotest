@@ -20,7 +20,6 @@ end
 
 get '/' do
 	$results = do_magic
-	pp $results	
 	haml :tests
 end
 
@@ -35,7 +34,7 @@ def notice tests
 end
 
 def test_bar tests
-	tests.size > 0 ? 'red' : 'green'
+	tests.count {|x| not x[:passed] } > 0 ? 'red' : 'green'
 end
 
 def plz_run_this command
