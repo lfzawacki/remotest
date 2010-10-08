@@ -5,6 +5,7 @@ require 'open4'
 require 'sinatra'
 require 'haml'
 require 'yaml'
+require 'pp'
 
 CONFIG = YAML::load_file(ARGV[0] || 'config.yml')
 
@@ -19,6 +20,7 @@ end
 
 get '/' do
 	$results = do_magic
+	pp $results	
 	haml :tests
 end
 
@@ -28,14 +30,12 @@ def parse_tests result
 end
 
 def notice tests
-	num_fail = tests[:failed].size
-	notice = num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} test(s) have failed..."
+	num_fail = tests.count { |t| not t[:passed] }
+	num_fail == 0 ? "All tests passed!" : "Fuuuuu! #{num_fail} test(s) have failed..."
 end
 
-def test_bar num_errors
-
-	type = num_errors > 0 ? 'red' : 'green'
-
+def test_bar tests
+	tests.size > 0 ? 'red' : 'green'
 end
 
 def plz_run_this command
