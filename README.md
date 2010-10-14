@@ -27,7 +27,7 @@ In the current moment we have (poor) support for these frameworks
 * simplectest (C)
 * unittest (Python)
 
-### How to build my own driver?s
+### How to build my own drivers?
 
 A driver is any object that has a call method, with this signature:
 
@@ -35,3 +35,6 @@ A driver is any object that has a call method, with this signature:
 
 stdout and stderr are regular strings and exitstatus is a number, therefore you can use it to parse the results of your command and return an array of the tests. Don't hesitate to look at the source code for the C and Python drivers. 
 
+### Configuration
+
+The config file is a simple yaml file that must be provided when remotest is started. If not present it'll load `config.yml`.
