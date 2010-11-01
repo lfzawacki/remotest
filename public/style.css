@@ -36,6 +36,10 @@ h1 {
 /*	width: 462px;*/
 /*}*/
 
+.controls {
+	visibility: none;
+}
+
 .output_left {
 	float: left;
 	padding-top: 20px;
