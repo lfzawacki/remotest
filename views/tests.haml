@@ -1,7 +1,6 @@
 !!!
 
-- require 'utils' #better way to do this?
-
+- require 'utils' #is there a better way to do this?
 
 %html
 	%head
@@ -15,6 +14,11 @@
 		%img{:src => test_bar($results) + ".png"}
 		%br
 
+		.controls
+			.h2 Hide all
+			.h2 Hide passed
+			.h2 Hide failed
+
 		.output_left
 			%h2= notice $results
 			%ul
@@ -25,4 +29,4 @@
 							= test[:test]
 								 
 							- if not test[:passed]
-								.cause=  hide_and_toggle test[:cause], :id => "test#{i}"
+								.cause=  hide_and_toggle test[:cause], :id => "failed#{i}"
