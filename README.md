@@ -46,3 +46,4 @@ The config file is a simple yaml file that must be provided when remotest is sta
 * The controls
 * Better css and images
 * Click in the passed/failed image to show more info
+
