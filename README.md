@@ -2,7 +2,7 @@
 
 ## what for?
 
-remotest is a sinatra web app to provide a  GUI for any testing framework that you may want to use. It is intended to be ran locally, just a web page in your web browser.
+remotest is a Sinatra web app to provide a  GUI for any testing framework that you may want to use. It is intended to be ran locally, just a web page in your web browser.
 
 ## how?
 
@@ -37,4 +37,10 @@ stdout and stderr are regular strings and exitstatus is a number, therefore you 
 
 ### Configuration
 
-The config file is a simple yaml file that must be provided when remotest is started. If not present it'll load `config.yml`.
+The config file is a simple yaml file that must be provided when remotest is started. If not present it'll load `config.yml`. Take a look at the sample config file (which is working with simplectest) and see for yourself how it's done, it should not be difficult for the human eyes to parse.
+
+## TODO
+
+* More parameters in the config file
+* Add more drivers (rspec is coming :)
+
