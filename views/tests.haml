@@ -1,7 +1,11 @@
 !!!
+
+- require 'utils' #better way to do this?
+
+
 %html
 	%head
-		%title Dojo tester
+		%title remotest
 		%link{:rel => "stylesheet", :href => "style.css", :media => "screen", :type => "text/css" }
 		%script{:type => "text/javascript", :src=>"beauty.js"}
 
@@ -14,11 +18,11 @@
 		.output_left
 			%h2= notice $results
 			%ul
-				- for test in $results
+				- $results.each_with_index do |test,i|
 					%li.test
 						%p
 							%img{:src => (test[:passed] ? "pass" : "fail") + ".png" }
 							= test[:test]
 								 
 							- if not test[:passed]
-								.cause= test[:cause]
+								.cause=  hide_and_toggle test[:cause], :id => "test#{i}"

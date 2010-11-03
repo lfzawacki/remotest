@@ -20,6 +20,7 @@ end
 
 get '/' do
 	$results = do_magic
+
 	haml :tests
 end
 
@@ -42,21 +43,3 @@ def plz_run_this command
 	ignore,status = Process::waitpid2 pid
 	{ :stdout => stdout.read, :stderr => stderr.read, :exitstatus => status.exitstatus }
 end
-
-def hidden_element text, options = {}
-		content_tag "div", text, :style => 'display: none;', :id => options[:id]
-end
-
-def toggle_hidden_element id, options = {}
-
-  	show = options[:show] || "Show"
-  	hide = (options[:hide] || options[:show]) || "Hide"
-
-  	text = content_tag "span", show, :id => "#{id}_field"
-
-  	options[:onclick] = "toggleText('#{id}','#{show}','#{hide}')"
-	mapped = options.map{|k,v| "#{k}=#{v}" }
-
-  	"<a href=\"javascript:void(0);\" #{mapped} } >" + text +"</a>"
-end
-
