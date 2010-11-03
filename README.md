@@ -43,4 +43,6 @@ The config file is a simple yaml file that must be provided when remotest is sta
 
 * More parameters in the config file
 * Add more drivers (rspec is coming :)
-
+* The controls
+* Better css and images
+* Click in the passed/failed image to show more info
